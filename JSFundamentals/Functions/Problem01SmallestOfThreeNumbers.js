@@ -1,14 +1,14 @@
 function printSmallestInteger(firstNum, secoundNum, thirthNum) {
     if (firstNum < secoundNum) {
-        if (firstNum < thirtNum) {
+        if (firstNum < thirthNum) {
             console.log(firstNum);
             
-        }else{
+        } else {
             console.log(thirthNum);
             
         }
-    }else{
-        if (secondNum < thirthNum) {
+    }else {
+        if (secoundNum < thirthNum) {
             console.log(secoundNum);
             
         }else{
