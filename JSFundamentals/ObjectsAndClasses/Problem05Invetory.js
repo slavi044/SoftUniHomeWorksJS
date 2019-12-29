@@ -5,7 +5,7 @@ function registerForHeroes(heroInfo) {
         let tokens = heroInfo[i].split(' / ');
         let heroName = tokens[0];
         let heroLevel = Number(tokens[1]);
-        let heroItems = tokens[2].split(', ');
+        let heroItems = tokens[2].split(', ').sort();
         
         let hero = {
             name: heroName,
