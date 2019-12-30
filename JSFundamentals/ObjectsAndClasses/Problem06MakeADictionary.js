@@ -1,10 +1,33 @@
 function makeADictionary(params) {
-    for (const word of params) {
-        let json = JSON.parse(word);
-        console.log(json);
-        
-    }// da gledam reshenieto ot lekciqta <3 :D 
+    let arrayOfTerms = [];
 
+    for (const word of params) {
+        let obj = JSON.parse(word);
+        let term =Object.keys(obj);
+        term = term[0];
+        
+        let definition = Object.values(obj);
+        definition = definition[0];
+        
+        arrayOfTerms.push({term, definition});
+    }
+
+    for (let i = 0; i < arrayOfTerms.length - 1; i++) {
+        for (let j = i + 1; j < arrayOfTerms.length; j++) {
+            if (arrayOfTerms[i].term === arrayOfTerms[j].term) {
+                arrayOfTerms.splice(i, 1);
+                i = 0;
+                j = i + 1;
+            }      
+        }
+    }
+
+    arrayOfTerms.sort((a, b) => a.term.localeCompare(b.term));
+
+    for (let obj of arrayOfTerms) {
+        console.log(`Term: ${obj.term} => Definition: ${obj.definition}`);
+                
+   }
 }
 
 makeADictionary([
