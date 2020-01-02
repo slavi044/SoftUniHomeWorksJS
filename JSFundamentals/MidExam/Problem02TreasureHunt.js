@@ -56,7 +56,6 @@ manageTreasureChest([
 
 console.log('----------------------------------------');
 
-
 manageTreasureChest([
         'Diamonds|Silver|Shotgun|Gold',
         'Loot Silver Medals Coal',
