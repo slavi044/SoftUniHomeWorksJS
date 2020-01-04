@@ -46,9 +46,6 @@ function partyList(commands) {
         console.log(regular);
         
     }
-
-
-
 }
 
 partyList([
