@@ -10,7 +10,7 @@ function netherRealms(input) {
         let healthPattern = /[^\d\.\+\-\*\/\,]+/gm;
         let digitResult = text.match(digitPattern);
         
-        if (digitResult !== null) {
+        if (digitResult !== null) { 
             
             damage = digitResult.map(Number).reduce((a, b) => (a + b));
             let damageArr = text.match(damagePattern);
