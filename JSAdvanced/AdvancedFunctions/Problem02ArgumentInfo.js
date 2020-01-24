@@ -26,4 +26,5 @@ ArgumentInfo(
     function () { console.log('Hello world!'); },
     false,
     false
+    
 );
