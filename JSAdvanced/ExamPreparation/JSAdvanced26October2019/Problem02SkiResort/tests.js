@@ -43,11 +43,11 @@ describe('SkiResort tests', function () {
     describe('Method bestHotel tests', function () {
         it('If have no voters', function () {
             let skiResort = new SkiResort('Pri Slavi');
+            
             skiResort.build('Pri Slavi', 20);
             skiResort.book('Pri Slavi', 2); 
             skiResort.leave('Pri Slavi', 2, 5);
 
-            let skiResort2 = new SkiResort('Pri Gosho');
             skiResort.build('Pri Gosho', 20);
             skiResort.book('Pri Gosho', 2); 
             skiResort.leave('Pri Gosho', 2, 4);
