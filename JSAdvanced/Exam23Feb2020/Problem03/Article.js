@@ -1,11 +1,11 @@
 class Article {
+    _comments = [];
+    _likes = [];
+    _counter = 0;
     constructor(title, creator) {
         this.title = title;
-        this.creator = creator;
-        this._comments = [];
-        this._likes = [];
-        this.counter = 0;
-    }
+        this.creator = creator;      
+    }//test
 
     get likes() {// not shure fore return messages!!!
         if (this._likes.length === 0) {
