@@ -6,7 +6,7 @@ function solve() {
         }
     }
 
-    class PartyBalon extends Balloon {
+    class PartyBalloon extends Balloon {
         constructor(color, gasWeight, ribbonColor, ribbonLength) {
             super(color, gasWeight)
             this.ribbonColor = ribbonColor,
@@ -22,7 +22,7 @@ function solve() {
         }        
     }
 
-    class BirthdayBalloon extends PartyBalon {
+    class BirthdayBalloon extends PartyBalloon {
         constructor(color, gasWeight, ribbonColor, ribbonLength, text) {
             super(color, gasWeight, ribbonColor, ribbonLength)
             this._text = text
@@ -35,7 +35,7 @@ function solve() {
 
     return {
         Balloon: Balloon,
-        PartyBalon: PartyBalon,
+        PartyBalloon: PartyBalloon,
         BirthdayBalloon: BirthdayBalloon
     }
 }
