@@ -18,7 +18,7 @@ function solve() {
         }
 
         get ribbon() {
-            return this._ribbon;
+            return this._ribbon; 
         }        
     }
 

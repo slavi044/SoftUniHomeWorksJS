@@ -62,9 +62,9 @@ function solve() {
     }
  
     return {
-        Employee,
-        Junior,
-        Senior,
-        Manager
+        Employee: Employee,
+        Junior: Junior,
+        Senior: Senior,
+        Manager: Manager
     }
 }
