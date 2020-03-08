@@ -4,8 +4,7 @@ function solve() {
    let titleInput = document.getElementById('title');
    let CategoryInput = document.getElementById('category');
    let contentInput = document.getElementById('content');
-   let buttonCreate = document.getElementsByClassName('btn create')[0];
-   
+   let buttonCreate = document.getElementsByClassName('btn create')[0];      
 
    buttonCreate.addEventListener('click', (e) => {
       e.preventDefault();
@@ -50,9 +49,14 @@ function solve() {
       
       crArticle.appendChild(div)
       article.appendChild(crArticle);
-      
-      console.log(crArticle);
-      
+
+      deleteButtonOnArticle.addEventListener('click', (event) => {
+         let evtpp = event.target.parentElement.parentElement.remove();         
+      });
+      archiveButtonOnArticle.addEventListener('click', () => {
+         console.log('a btn');
+         
+      });      
    });
    
    
