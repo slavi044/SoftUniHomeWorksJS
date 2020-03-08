@@ -4,7 +4,8 @@ function solve() {
    let titleInput = document.getElementById('title');
    let CategoryInput = document.getElementById('category');
    let contentInput = document.getElementById('content');
-   let buttonCreate = document.getElementsByClassName('btn create')[0];      
+   let buttonCreate = document.getElementsByClassName('btn create')[0];  
+   let archiveSection = document.getElementsByClassName('archive-section')[0].children[1];      
 
    buttonCreate.addEventListener('click', (e) => {
       e.preventDefault();
@@ -44,6 +45,11 @@ function solve() {
       archiveButtonOnArticle.className = 'btn archive';
       archiveButtonOnArticle.innerHTML = 'Archive';
 
+      // titleInput.value = '';
+      // CategoryInput.value = '';
+      // authorInput.value = '';
+      // contentInput.value = '';
+
       div.appendChild(deleteButtonOnArticle);
       div.appendChild(archiveButtonOnArticle);
       
@@ -53,9 +59,24 @@ function solve() {
       deleteButtonOnArticle.addEventListener('click', (event) => {
          let evtpp = event.target.parentElement.parentElement.remove();         
       });
-      archiveButtonOnArticle.addEventListener('click', () => {
-         console.log('a btn');
+      archiveButtonOnArticle.addEventListener('click', (a) => {
+         let title = a.target.parentElement.parentElement.children[0].textContent;
+ 
+         let li = document.createElement('li');
+         li.textContent = title;
+ 
+         archiveSection.appendChild(li);
+ 
+         a.target.parentElement.parentElement.remove(); 
          
+         let listItems = Array.from(archiveSection.children);
+         archiveSection.innerHTML = '';
+ 
+         listItems
+         .sort((a, b) => a.textContent.localeCompare(b.textContent))
+         .forEach(li => archiveSection.appendChild(li));
+
+              
       });      
    });
    
