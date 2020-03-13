@@ -5,13 +5,11 @@ function attachEvents() {
     let phoneField = document.getElementById('phone');
     let phonebook = document.getElementById('phonebook');
 
-    let numberOfElement;    
-
-    //TODO: repair code
+    let numberOfElement;
 
     function checkForErrors(res) {
         if (res === null || res === undefined) {
-            throw new Error('Invalid data!');
+            console.log('Invalid data!');
         }
 
         return res;
@@ -21,6 +19,12 @@ function attachEvents() {
         return fetch('https://phonebook-nakov.firebaseio.com/phonebook.json')
             .then(checkForErrors)
             .then(x => x.json())
+    }
+
+    function deleteNumber(e) {
+        fetch(`https://phonebook-nakov.firebaseio.com/phonebook/${e.target.value}.json`, {
+            method: "DELETE"
+        })
     }
 
     function appendPhones(res) {
@@ -35,11 +39,8 @@ function attachEvents() {
             button.value = id;
             button.addEventListener('click', (e) => {
                 console.log('click ' + e.target.value);
-                
-                fetch(`https://phonebook-nakov.firebaseio.com/phonebook/${e.target.value}.json`, {
-                    method: "DELETE"
-                })
 
+                deleteNumber(e);
             })
 
             li.appendChild(button);
@@ -47,16 +48,16 @@ function attachEvents() {
 
             loadBtn.click;
             personField.value = '';
-            phoneField.value = '';     
+            phoneField.value = '';
         });
     };
 
     loadBtn.addEventListener('click', () => {
         getPhones()
             .then(checkForErrors)
-            .then(res => {                
-                console.log(res);//delete
-                
+            .then(res => {
+                console.log(res);
+
                 appendPhones(res);
             });
 
