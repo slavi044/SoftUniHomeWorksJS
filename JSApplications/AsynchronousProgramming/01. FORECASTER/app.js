@@ -72,10 +72,10 @@ function attachEvents() {
                     fetch(CURRENT_UPCOMING_URL).then(res => res.json())
                 ])
                     .then(showWeatherLocation)
-                    //.catch((e) => console.log(e.message))
+                    .catch((e) => console.log(e.message))
 
             })
-            //.catch((e) => console.log(e.message))
+            .catch((e) => console.log(e.message))
     };
 }
 
