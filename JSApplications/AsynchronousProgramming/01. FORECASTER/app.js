@@ -7,7 +7,7 @@ function attachEvents() {
         button: document.querySelector('#submit'),
         currentDiv: document.querySelector('#current'),
         upcomingDiv: document.querySelector('#upcoming'),
-        forecastWrapper: document.querySelector("#forecast") 
+        forecastWrapper: document.querySelector("#forecast")
     }
 
     const weatherSymbols = {
@@ -32,6 +32,26 @@ function attachEvents() {
         return element;
     }
 
+    function showUpcomingWeatherLocation({ forecast, name }) {
+        let forecastInfoDiv = createHTMLElement('div', ['forecast-info']);
+
+        forecast.forEach(({ condition, high, low }) => {
+            let upcomingSpan = createHTMLElement('span', ['upcoming']);
+
+            let symbolSpan = createHTMLElement('span', ['symbol'], weatherSymbols[condition[0].toLowerCase()]);
+            let degreeseSpan = createHTMLElement('span', ['forecast-data'], `${low}${weatherSymbols.d}/${high}${weatherSymbols.d}`);
+            let conditionSpan = createHTMLElement('span', ['forecast-data'], condition);
+
+            upcomingSpan.appendChild(symbolSpan);
+            upcomingSpan.appendChild(degreeseSpan);
+            upcomingSpan.appendChild(conditionSpan);
+
+            forecastInfoDiv.appendChild(upcomingSpan);
+        });
+
+        elements.upcomingDiv.appendChild(forecastInfoDiv);
+    };
+
     function showWeatherLocation([todayData, upcomingData]) {
         const { condition, high, low } = todayData.forecast;
 
@@ -52,6 +72,8 @@ function attachEvents() {
 
         elements.currentDiv.appendChild(forecastsDiv);
         elements.forecastWrapper.style.display = 'block';
+
+        showUpcomingWeatherLocation(upcomingData);
     };
 
     elements.button.addEventListener('click', getLocationValue);
