@@ -13,12 +13,10 @@ function engine() {
     btnLoadBooks.addEventListener('click', (event) => {
         event.preventDefault();
         booksTable.innerHTML = '';
-        
+
         get()
             .then(res => {
                 Object.entries(res).forEach(e => {
-                    console.log(e);                  
-
                     let tr = createHTMLElement('tr');
 
                     let title = createHTMLElement('td', e[1].title);
@@ -30,29 +28,68 @@ function engine() {
                     let btnDelete = createHTMLElement('button', 'Delete', e[0]);
 
                     btnEdit.addEventListener('click', (event) => {
+                        event.preventDefault();                        
+                        
                         let bookToEdit = event.target.parentElement.parentElement;
-                        console.log(bookToEdit);
+                        let id = event.target.value;
 
-                        console.log(event.target.parentElement.parentElement.children);
+                        let infoForBook = event.target.parentElement.parentElement.children;
 
-                        let title = event.target.parentElement.parentElement.children[0];
-                        let author = event.target.parentElement.parentElement.children[1];
-                        let isbn = event.target.parentElement.parentElement.children[2];
-                        let btnSave = event.target.parentElement.parentElement.children[3].children[0];
-                        let btnCancel = event.target.parentElement.parentElement.children[3].children[1];
+                        let title = createHTMLElement('input', null, null, infoForBook[0].textContent);
+                        let author = createHTMLElement('input', null, null, infoForBook[1].textContent);
+                        let isbn = createHTMLElement('input', null, null, infoForBook[2].textContent);
 
-                        title.outerHTML = `<input placeholder='${event.target.parentElement.parentElement.children[0].textContent}'></input>`;
-                        author.outerHTML = `<input placeholder='${event.target.parentElement.parentElement.children[1].textContent}'></input>`;
-                        isbn.outerHTML = `<input placeholder='${event.target.parentElement.parentElement.children[2].textContent}'></input>`;
-                        btnSave.outerHTML = '<button>Save</button>';
-                        btnCancel.outerHTML = '<button>Cancel</button>';
+                        let btnSave = createHTMLElement('button', 'Save');
+                        let btnCancel = createHTMLElement('button', 'Cancel');
 
-                        //TODO: set buttons save and change operations and To arrange input fields.
+                        bookToEdit.innerHTML = '';
+                        bookToEdit.appendChild(title);
+                        bookToEdit.appendChild(author);
+                        bookToEdit.appendChild(isbn);
+                        bookToEdit.appendChild(btnSave);
+                        bookToEdit.appendChild(btnCancel);
+
+                        btnSave.addEventListener('click', () => {                            
+                            let newTitle = '';
+                            let newAuthor = '';
+                            let newISBN = '';
+
+                            if (title.value === '') {
+                                newTitle = title.placeholder;
+                            } else {
+                                newTitle = title.value;
+                            }
+
+                            if (author.value === '') {
+                                newAuthor = author.placeholder;
+                            } else {
+                                newAuthor = author.value;
+                            }
+
+                            if (isbn.value === '') {
+                                newISBN = isbn.placeholder;
+                            } else {
+                                newISBN = isbn.value;
+                            }
+
+                            let bookBody = {
+                                title: newTitle,
+                                author: newAuthor,
+                                ISBN: newISBN
+                            };
+
+                            updateBook(id, bookBody);
+                            btnLoadBooks.click();
+                        });
+
+
+                        btnCancel.addEventListener('click', () => {
+                            btnLoadBooks.click();
+                        });
                     });
-                    
+
                     btnDelete.addEventListener('click', (event) => {
                         let bookToRemove = event.target.value;
-                        console.log(bookToRemove);
                         deleteBook(bookToRemove);
                     });
 
@@ -65,10 +102,10 @@ function engine() {
                     tr.appendChild(buttonsHolder);
 
                     booksTable.appendChild(tr);
-                }); 
+                });
             })
             .catch(err => {
-                console.log('Invalid operation!');                
+                console.log('Invalid operation!');
             })
     });
 
@@ -82,19 +119,22 @@ function engine() {
         };
 
         createBook(bookBody);
-        console.log(bookBody);
     });
 }
 
-function createHTMLElement(type, content, value) {
+function createHTMLElement(type, content, value, placeholder) {
     let element = document.createElement(type);
-    
+
     if (content) {
         element.textContent = content;
     }
 
     if (value) {
         element.value = value;
+    }
+
+    if (placeholder) {
+        element.placeholder = placeholder;
     }
 
     return element;

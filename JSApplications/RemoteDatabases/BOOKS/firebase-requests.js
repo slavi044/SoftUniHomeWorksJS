@@ -15,7 +15,7 @@ function createBook(body) {
 function updateBook(id, body) {
     fetch(fireBaseUrl + `/books/${id}.json`, {
         method: 'PUT',
-        body: body
+        body: JSON.stringify(body)
     })
 }
 
