@@ -1,25 +1,28 @@
-const fireBaseUrl = 'https://remotedb-exercisebooks.firebaseio.com/remotedb-exercisebooks.json'; // <-- Here paste URL from your database! :) 
+const fireBaseUrl = 'https://remotedb-exercisebooks.firebaseio.com'; // <-- Here paste URL from your database! :) 
 
 function get() {
-    return fetch(fireBaseUrl)
+    return fetch(fireBaseUrl + '/books.json')
         .then(res => res.json());
 }
 
 function createBook(body) {
-    fetch(fireBaseUrl, {
+    fetch(fireBaseUrl + '/books.json', {
         method: 'POST',
-        body: body
+        body: JSON.stringify(body)
     })
 }
 
 function updateBook(id, body) {
-    
+    fetch(fireBaseUrl + `/books/${id}.json`, {
+        method: 'PUT',
+        body: body
+    })
 }
 
 function deleteBook(id) {
-    fetch(fireBaseUrl, {
+    fetch(fireBaseUrl + `/books/${id}.json`, {
         method: 'DELETE'
     })
 }
 
-export { get, createBook, updateBook, deleteBook}
+export { get, createBook, updateBook, deleteBook }
