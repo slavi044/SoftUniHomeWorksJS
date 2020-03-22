@@ -47,7 +47,7 @@ async function engine() {
 function loadStudents() {
     return getStudents()
         .then(res => {
-            let students = Object.entries(res);//TODO: sort by id this not work : .sort((a, b) => { b[1].ID.localeCompare(a[1].ID) });
+            let students = Object.entries(res).sort((a, b) =>  a[1].ID - b[1].ID );
             console.log(students);
             
             for (const std of students) {
