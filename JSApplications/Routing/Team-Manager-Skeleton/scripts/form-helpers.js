@@ -1,4 +1,4 @@
-const extractFromData = (formRef, formConfig) => {
+const extractFormData = (formRef, formConfig) => {
     return formConfig.reduce((acc, inputName) => {
         acc[inputName] = formRef.elements[inputName].value;
         return acc;
@@ -13,7 +13,7 @@ const fillFormWithData = (formRef, formValue) => {
         if (!formRef.elements.namedItem(inputName)) {
             return;
         }
-        fomrRef.elements.namedItem(inputName).value = value;
+        formRef.elements.namedItem(inputName).value = value;
     });
 };
 
@@ -27,20 +27,20 @@ const clearForm = (formRef, formConfig) => {
  * 
  * @param {HTMLElement} formRef Reference to html element of type 'form'
  * @param {string[]} formConfig string array describing the 'name' attribute of all inputs
- * inside the provided formRef
+ * inside the provided formRef 
  */
 export const createFormEntity = (formRef, formConfig) => {
     /**
      * Return the current form value as object
      */
-    const getValue = () => extractFromData(formRef, formConfig);
+    const getValue = () => extractFormData(formRef, formConfig);
 
     /**
-     * fills all possible form fields based on incoming object
-     * @param {{[key:string]}} formValue
+     * Fills all possible form fields based on incoming object
+     * @param {{[key:string]}} formValue 
      */
-    const setValue = (formValue) => fillFormWithData(formRef, formConfig);
-    
+    const setValue = (formValue) => fillFormWithData(formRef, formValue);
+
     /**
      * Clears the form
      */
@@ -49,5 +49,5 @@ export const createFormEntity = (formRef, formConfig) => {
         getValue,
         setValue,
         clear
-    }
-}
+    };
+};

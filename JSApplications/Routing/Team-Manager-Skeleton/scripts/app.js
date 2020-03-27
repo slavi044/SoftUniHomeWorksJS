@@ -1,61 +1,82 @@
-//TODO: import helper functions 
+import { requester } from './services/app-service.js';
+import {
+    homeViewHandler,
+    aboutViewHandler,
+    loginHandler,
+    registerViewHandler,
+    logoutHandler,
+    detailsHandler,
+    editHandler as editHandler,
+    likesHandler,
+    joinTeamHandler,
+    leaveTeamHandler,
+    deleteHandler,
+    createTrekHandler
+} from './handlers/index.js';
 
-async function homeViewHandler() {
-    // load some data
-    this.partials = {
-        header: await this.load('./templates/common/header.hbs'),
-        footer: await this.load('./templates/common/footer.hbs')
-    };
+const apiKey = 'https://fir-playground-6c579.firebaseio.com/';
+requester.init(apiKey, sessionStorage.getItem('token'));
 
-    this.partial('./templates/home/home.hbs');
-}
 
-async function aboutViewHandler() {
-    this.partials = {
-        header: await this.load('./templates/common/header.hbs'),
-        footer: await this.load('./templates/common/footer.hbs')
-    };
-
-    this.partial('./templates/about/about.hbs');    
-}
-
-async function loginHandler() {
-    this.partials = {
-        header: await this.load('./templates/common/header.hbs'),
-        footer: await this.load('./templates/common/footer.hbs'),
-        loginForm: await this.load('./templates/login/loginForm.hbs')
-    };
-
-    await this.partial('./templates/login/loginPage.hbs');
-    console.log(document.getElementById('login-form'));
-}
-
-async function registerViewHandler() {
-    this.partials = {
-        header: await this.load('./templates/common/header.hbs'),
-        footer: await this.load('./templates/common/footer.hbs'),
-        registerForm: await this.load('./templates/register/registerForm.hbs')
-    };
-
-    await this.partial('./templates/register/registerPage.hbs');
-    let formRef = document.getElementById('register-form');
-}
-
-// initialize the application
-var app = Sammy('#main', function () {
-    // include a plugin
+/**
+ * Configure the application with all it's routes and the template engine that it uses 
+ */
+const app = Sammy('#main', function () {
+    /**
+     * Setting handlebars as template engine
+     */
     this.use('Handlebars', 'hbs');
 
-    // define a 'route'
+    /**
+     * Define routes to be used by the application
+     */
     this.get('#/', homeViewHandler);
     this.get('#/home', homeViewHandler);
-    this.get('#/about', aboutViewHandler);
+    /** 
+     * Register 
+     */
+    this.get('#/register', registerViewHandler);
+    this.post('#/register', () => false);
+    /** 
+     * Logout
+     */
+    this.get('#/logout', logoutHandler);
+    /** 
+     * Login
+     */
     this.get('#/login', loginHandler);
-    this.get('#/register', registerViewHandler)
+    this.post('#/login', () => false);
+    /**
+     * Create trek
+     */
+    this.get('#/create', createTrekHandler);
+    this.post('#/create', () => false);
+    /**
+     * Details
+     */
+    this.get('#/details/:id', detailsHandler);
+    /**
+     * Likes
+     */
+    this.get('#/likes/:currentLikes/:id', likesHandler)
+    /**
+     * Edit
+     */
+    this.get('#/edit/:id', editHandler);
+    this.post('#/edit/:id', () => false);
+    /**
+     * Delete
+     */
+    this.get('#/delete/:id', deleteHandler);
+
+    // this.get('#/about', aboutViewHandler);
+    // this.get('#/catalog', catalogueHandler);
+    // this.post('#/catalog', () => false);
+    // this.post('#/catalog', false);
+    // this.get('#/join/:id', joinTeamHandler);
+    // this.get('#/leave/:id', leaveTeamHandler);
 });
-
-// start the application
-(() => {
-    app.run('#/');
-
-})();
+/**
+ * Start the application
+ */
+app.run('#/');
