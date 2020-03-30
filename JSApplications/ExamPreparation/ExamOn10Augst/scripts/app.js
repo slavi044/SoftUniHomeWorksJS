@@ -13,13 +13,19 @@ const app = Sammy('#root', function () {
 
    this.post('#/user/login', controllers.user.post.login);
    this.post('#/user/register', controllers.user.post.register);
+   this.get('#/user/logout', controllers.user.get.logout)
 
 
    //Causes
-   this.get('#/cause/dashboard', controllers.cause.getdashboard);
-   this.get('#/cause/create');
+   this.get('#/cause/dashboard', controllers.cause.get.dashboard);
+   this.get('#/cause/create', controllers.cause.get.create);
+   this.get('#/cause/details/:causeId', controllers.cause.get.details)              
+
+   this.post('#/cause/create', controllers.cause.post.create);
 });
 
 (() => {
     app.run('#/home');
 })();
+
+// have to do donation functionality <<<

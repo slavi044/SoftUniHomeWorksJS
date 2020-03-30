@@ -1,24 +1,24 @@
 import models from '../models/index.js';
+import extend from '../utils/context.js';
 
 export default {
     get: {
         login(context) {
             console.log(context);
 
-            context.loadPartials({
-                header: '../views/common/header.hbs',
-                footer: '../views/common/footer.hbs'
-            }).then(function () {
+            extend(context).then(function () {
                 this.partial('../views/user/login.hbs')
             })
         },
         register(context) {
-            context.loadPartials({
-                header: '../views/common/header.hbs',
-                footer: '../views/common/footer.hbs'
-            }).then(function () {
+            extend(context).then(function () {
                 this.partial('../views/user/register.hbs')
             })
+        },
+        logout(context) {
+            models.user.logout().then((response) => {
+                context.redirect('#/home');
+            });
         }
     },
     post: {
@@ -28,7 +28,7 @@ export default {
             models.user.login(username, password)
                 .then((response) => {
                     context.user = response;
-                    context.username = user.email;
+                    context.username = response.email;
                     context.isLoggedIn = true;
                     context.redirect("#/home");
 

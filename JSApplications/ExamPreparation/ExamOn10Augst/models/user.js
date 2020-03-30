@@ -7,6 +7,6 @@ export default {
         return firebase.auth().signInWithEmailAndPassword(username, password)
     },
     logout() { 
-        
+        return firebase.auth().signOut();
     }
-};
+}
