@@ -16,6 +16,8 @@ const app = Sammy('#root', function () {
 
 
    //Causes
+   this.get('#/cause/dashboard', controllers.cause.getdashboard);
+   this.get('#/cause/create');
 });
 
 (() => {
