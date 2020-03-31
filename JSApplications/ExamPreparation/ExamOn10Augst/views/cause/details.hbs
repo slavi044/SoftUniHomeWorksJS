@@ -10,9 +10,8 @@
             </div>
             <div class="modal-body">
                 <center>
-                    <img style="border-radius: 5px;"
-                        src="{{ cause.pictureUrl }}" name="aboutme"
-                        width="500" height="auto" border="0" class="img-circle">
+                    <img style="border-radius: 5px;" src="{{ cause.pictureUrl }}" name="aboutme" width="500"
+                        height="250px" border="0" class="img-circle">
                     <h3 class="media-heading">{{cause.cause}}</h3>
                     <span>Collected</span>
                     <strong class="label text-success">${{cause.collectedFunds}}</strong>
@@ -26,19 +25,22 @@
                     </p>
                     <br>
                     <p style="word-wrap: break-word;" class="text-left"><strong>Donors:</strong><br>
-                        {{#each donors}}
+                        {{#each cause.donors}}
                         <span>{{ this }}</span>
                         {{/each}}
                     </p>
                 </center>
             </div>
             <div class="modal-footer">
-                <a href="" class="btn btn-danger">Close the cause</a>
-                <form method="" action="">
+                {{#if cause.canDonate}}
+                <form method="POST" action="#/cause/donate/{{ cause.id }}">
                     <label class="grey-text font-weight-light">My donation: </label>
-                    <input name="currentDonation" type="number" min="1" class="form-control" />
+                    <input name="donatedAmount" type="number" min="1" class="form-control" />
                     <button style="width: 100%;" class="btn btn-success" type="submit">Make the donation</button>
                 </form>
+                {{else}}
+                <a href="#/cause/close/{{ cause.id }}" class="btn btn-danger">Close the cause</a>
+                {{/if}}
             </div>
         </div>
     </div>

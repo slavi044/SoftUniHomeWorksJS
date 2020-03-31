@@ -7,7 +7,6 @@ export default {
         dashboard(context) {
             models.cause.getAll().then((response) => {
                 const causes = response.docs.map(docModifier);
-
                 context.causes = causes;
 
                 extend(context).then(function () {
@@ -26,6 +25,9 @@ export default {
             models.cause.get(causeId).then((response) => {
                 const cause = docModifier(response);
                 context.cause = cause;
+                context.cause.canDonate = cause.uid !== localStorage.getItem('userId');
+                console.log(localStorage.getItem('userId'));
+
                 extend(context).then(function () {
                     this.partial('./views/cause/details.hbs');
                 });
@@ -43,10 +45,33 @@ export default {
             };
 
             models.cause.create(data).then((response) => {
-                console.log(response);
                 context.redirect('#/cause/dashboard');
 
             }).catch((e) => console.error(e));
+        }
+    },
+    del: {
+        close(context) {
+            const { causeId } = context.params;
+            
+            models.cause.close(causeId).then((response) => {
+                context.redirect('#/cause/dashboard');
+            });            
+        }
+    },
+    put: {
+        donate(context) {
+            const { causeId, donatedAmount } = context.params;
+
+            models.cause.get(causeId).then((response) => {
+                const cause = docModifier(response);
+                cause.collectedFunds+= Number(donatedAmount);             
+                cause.donors.push(localStorage.getItem('userEmail'));
+                return models.cause.donate(causeId, cause);
+            })
+            .then((response) => {
+                context.redirect('#/cause/dashboard');
+            });
         }
     }
 }
