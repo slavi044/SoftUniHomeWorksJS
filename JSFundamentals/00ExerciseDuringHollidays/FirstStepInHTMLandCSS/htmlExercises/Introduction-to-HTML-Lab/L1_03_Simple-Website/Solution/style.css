@@ -1,0 +1,35 @@
+nav{
+    background: rgb(16, 0, 245)
+}
+
+ul, body{
+  margin: 0;  
+}
+
+nav ul li{
+    display: inline;
+    margin: 10px;
+}
+
+nav ul li a{
+    font: family;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+
+article{
+    border:1px solid red;
+}
+
+section{
+    border: 1px solid blue;
+    padding: 10px;
+}
+
+main{
+    margin: 10px;
+}
+
+footer{
+    background: rgb(16, 0, 245)
+}
