@@ -2,11 +2,11 @@ function solve(array) {
     let arr = [];
     for (let i = 1; i < array.length; i++) {
         let tokens = array[i].split(' | ');
-        let town = tokens[0].substring(2);
-        let latitude = `${Number(tokens[1]).toFixed(2)}`;
-        let longitude = `${Number(tokens[2].substring(0, tokens[2].length - 2)).toFixed(2)}`;
+        let Town = tokens[0].substring(2);
+        let Latitude = Number(`${Number(tokens[1]).toFixed(2)}`);
+        let Longitude = Number(`${Number(tokens[2].substring(0, tokens[2].length - 2)).toFixed(2)}`);
         
-        arr.push({town, latitude, longitude});
+        arr.push({Town, Latitude, Longitude});
     }
 
     let output = `[`;
