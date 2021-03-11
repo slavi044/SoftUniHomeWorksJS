@@ -8,7 +8,7 @@ function solve(e) {
         Web: "WEB-MODULE"
     }
 
-    addBtn.addEventListener('click', (e) => { //TODO: implement delete button and sort lectures in moldules
+    addBtn.addEventListener('click', (e) => { //TODO: sort lectures in moldules
         e.preventDefault();
 
         let lectureNameField = document.getElementsByName('lecture-name')[0];
@@ -71,19 +71,6 @@ function solve(e) {
                 divModule.appendChild(ul);
                 divModules.appendChild(divModule)
             }
-
-            // let modules = divModules.children;
-            
-            // for (let i = 0; i < modules.length; i++) {
-            //    let elements = Array.from(modules[i].children);
-            //    let h3 = elements.shift();
-            //    let uls = elements.sort((a, b) => b - a);
-            //    modules[i].innerHTML = "";
-            //    modules[i].appendChild(h3);
-            //    uls.forEach(element => {
-            //     modules[i].appendChild(element);
-            //    });
-            // }
         }
     });
 
@@ -91,7 +78,13 @@ function solve(e) {
         event.preventDefault();
 
         let btn = event.target;
-        console.log(btn);
-        
+        let lectureDiv = btn.parentElement.parentElement;
+        let module = lectureDiv.parentElement;
+        console.log(module);
+        lectureDiv.remove();
+
+        if (module.children.length < 2) {
+            module.remove();
+        }
     }
 };
