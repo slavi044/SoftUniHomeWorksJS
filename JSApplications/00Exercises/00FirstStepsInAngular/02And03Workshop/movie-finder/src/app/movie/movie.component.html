@@ -1,0 +1,15 @@
+<div class="card mb-3">
+  <!-- <img [src]="imagePath" class="d-block user-select-none" width="100%" height="200"
+    aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice"
+    viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
+    <!-- <rect width="100%" height="100%" fill="#868e96"></rect>
+    <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text> 
+  </img> -->
+  <img [src]="imagePath" class="d-block user-select-none" alt="Responsive image">
+  <div class="card-text">{{ movie.title }}</div>
+  <h6>{{ movie.release_date }}</h6>
+
+  <div class="card-footer text-muted">
+    <button class="btn btn-primary" [id]="movie.id" (click)="clickButton()">View Details</button>
+  </div>
+</div>
