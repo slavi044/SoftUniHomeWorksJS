@@ -1,9 +1,9 @@
 <div id="container">
-  <header>
+   <!-- <header>
     <span class="logo">☃</span><span class="header">SeenIt</span>
     <div *ngIf="isLoggedIn" id="profile"><span>{{username}}</span>|<button (click)="logout()">logout</button></div>
-  </header>
-  <div class="content">
+  </header> 
+    <div class="content">
     <div id="menu">
       <div class="title">Navigation</div>
       <ng-template [ngIf]="!isLoggedIn">
@@ -18,6 +18,10 @@
     </div>
 
     <router-outlet></router-outlet>
-  </div>
-  <footer>SeenIt SPA © {{date | date: 'yyyy'}}</footer>
-</div>
+  </div> 
+ <footer>SeenIt SPA © {{date | date: 'yyyy'}}</footer>  -->
+
+  <app-header></app-header>
+  <app-content></app-content>
+  <app-footer></app-footer>
+</div> 
