@@ -1,0 +1,6 @@
+<article class="post post-content">
+  <p>{{commentInfo.content}}</p>
+  <div class="info">
+    submitted by {{commentInfo.author}} | <button *ngIf="isCommentAuthor()" (click)="deleteComment()" class="deleteLink">delete</button>
+  </div>
+</article>

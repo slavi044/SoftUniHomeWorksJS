@@ -1,0 +1,5 @@
+<header>
+  <span class="logo">☃</span><span class="header">SeenIt</span>
+  <div *ngIf="isLogged$ | async" id="profile"><span>{{(username$ | async)}}</span>|<button
+      (click)="logout()">logout</button></div>
+</header>

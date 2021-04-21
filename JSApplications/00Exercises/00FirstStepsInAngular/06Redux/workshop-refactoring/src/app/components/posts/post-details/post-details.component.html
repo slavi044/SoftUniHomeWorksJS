@@ -1,0 +1,11 @@
+<section id="viewComments">
+  <app-post-info [post]="post" [rank]="1" [desc]="post.description">
+  </app-post-info>
+  <div class="post post-content">
+    <app-comment-create (onCreateComment)="loadComments()" [postId]="post._id">
+    </app-comment-create>
+  </div>
+  <app-comment-info *ngFor="let comment of comments$ | async" [commentInfo]="comment"
+    (onDeleteComment)="deleteComment($event)">
+  </app-comment-info>
+</section>
